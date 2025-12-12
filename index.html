@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple Responsive Form</title>
+  <style>
+    /* Basic reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(120deg,#f6f9ff 0%, #fff 40%);
+      color:#111;
+      padding:32px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+    }
+
+    .card{
+      width:100%;
+      max-width:760px;
+      background:#ffffff;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(20,30,60,0.08);
+      padding:28px;
+    }
+
+    h1{font-size:20px;margin-bottom:8px}
+    p.lead{color:#5b6b8a;margin-bottom:18px}
+
+    form{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px 18px;
+    }
+
+    /* Make the form single-column on small screens */
+    @media (max-width:640px){
+      form{grid-template-columns:1fr}
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      margin-bottom:6px;
+      color:#283145;
+      font-weight:600;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    input[type="date"],
+    select,
+    textarea{
+      padding:10px 12px;
+      border:1px solid #e3e8f0;
+      border-radius:8px;
+      font-size:14px;
+      outline:none;
+      transition:box-shadow .15s, border-color .15s;
+      background:#fbfdff;
+    }
+
+    input:focus, select:focus, textarea:focus{
+      box-shadow:0 6px 18px rgba(41,96,255,0.08);
+      border-color: #2b6ef6;
+    }
+
+    .full{grid-column:1 / -1}
+
+    .row{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .radio-group, .checkbox-group{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:6px;
+    }
+
+    .small{
+      font-size:13px;color:#667085
+    }
+
+    .btn{
+      display:inline-block;
+      background:#2b6ef6;
+      color:white;
+      padding:10px 16px;
+      border-radius:10px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      letter-spacing:.2px;
+      transition:transform .08s, box-shadow .08s;
+    }
+
+    .btn:active{transform:translateY(1px)}
+    .btn.secondary{background:#f1f5f9;color:#111;border:1px solid #e6eefc}
+
+    .actions{
+      margin-top:6px;
+      display:flex;
+      gap:12px;
+      justify-content:flex-end;
+      grid-column:1 / -1;
+    }
+
+    .note{font-size:13px;color:#8b97b0}
+
+    /* small helpers */
+    input[type="file"]{padding:6px}
+    textarea{min-height:110px;resize:vertical}
+
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Registration Form</h1>
+    <p class="lead">Simple responsive HTML + CSS form — fields required where marked.</p>
+
+    <form id="simpleForm" action="#" method="post" novalidate>
+      <div class="field">
+        <label for="firstName">First Name <span style="color:#e11;">*</span></label>
+        <input id="firstName" name="firstName" type="text" placeholder="Ali" required />
+      </div>
+
+      <div class="field">
+        <label for="lastName">Last Name</label>
+        <input id="lastName" name="lastName" type="text" placeholder="Khan" />
+      </div>
+
+      <div class="field">
+        <label for="email">Email <span style="color:#e11;">*</span></label>
+        <input id="email" name="email" type="email" placeholder="name@example.com" required />
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" placeholder="0300-1234567" />
+      </div>
+
+      <div class="field">
+        <label for="password">Password <span style="color:#e11;">*</span></label>
+        <input id="password" name="password" type="password" placeholder="At least 8 characters" minlength="8" required />
+        <small class="small">Minimum 8 characters</small>
+      </div>
+
+      <div class="field">
+        <label for="dob">Date of Birth</label>
+        <input id="dob" name="dob" type="date" />
+      </div>
+
+      <div class="field full">
+        <label for="bio">Short Bio</label>
+        <textarea id="bio" name="bio" placeholder="Tell us a little about yourself..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="country">Country</label>
+        <select id="country" name="country">
+          <option value="">Select country</option>
+          <option>Pakistan</option>
+          <option>India</option>
+          <option>United States</option>
+          <option>United Kingdom</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Gender</label>
+        <div class="radio-group" role="radiogroup" aria-labelledby="genderLabel">
+          <label><input type="radio" name="gender" value="male"> Male</label>
+          <label><input type="radio" name="gender" value="female"> Female</label>
+
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="resume">Upload Resume</label>
+        <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" />
+      </div>
+
+      <div class="field full">
+        <label>Interests</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="int[]" value="coding"> Coding</label>
+          <label><input type="checkbox" name="int[]" value="design"> Design</label>
+          <label><input type="checkbox" name="int[]" value="music"> Music</label>
+        </div>
+      </div>
+
+      <div class="field full">
+        <label for="terms">Agreement</label>
+        <div class="row">
+          <label class="small"><input id="terms" name="terms" type="checkbox" required> I agree to the <a href="#">terms & conditions</a>.</label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="reset" class="btn secondary">Reset</button>
+        <button type="submit" class="btn">Submit</button>
+      </div>
+
+    </form>
+  </main>
+
+</body>
+</html>
